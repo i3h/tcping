@@ -1,0 +1,59 @@
+name: build
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  publish_release:
+    runs-on: ubuntu-latest
+    steps:
+      # checkout code
+      - uses: actions/checkout@master
+      # create release
+      - uses: actions/create-release@v1
+        id: create_release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: |
+            Changes in this Release
+            - First Change
+            - Second Change
+          draft: false
+          prerelease: false
+      # build binaries
+      - uses: actions/setup-go@v1
+        with:
+          go-version: '1.13.5'
+      - name: build
+        run: |
+          mkdir pingme-linux-amd64
+          mkdir pingme-darwin-amd64
+          env VERSION=$(echo ${GITHUB_REF:10}) GIN_MODE=release GOOS=linux GOARCH=amd64 bash -c 'go build -ldflags "-X main.VersionString=$VERSION" -o pingme-linux-amd64/pingme *.go'
+          env VERSION=$(echo ${GITHUB_REF:10}) GIN_MODE=release GOOS=darwin GOARCH=amd64 bash -c 'go build -ldflags "-X main.VersionString=$VERSION" -o pingme-darwin-amd64/pingme *.go'
+          tar -C $PWD -cvzf pingme-linux-amd64.tar.gz pingme-linux-amd64
+          tar -C $PWD -cvzf pingme-darwin-amd64.tar.gz pingme-darwin-amd64
+      # upload binaries linux
+      - uses: actions/upload-release-asset@v1.0.1
+        id: upload-release-asset-linux
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./pingme-linux-amd64.tar.gz
+          asset_name: pingme-linux-amd64.tar.gz
+          asset_content_type: application/gzip
+      # upload binaries darwin
+      - uses: actions/upload-release-asset@v1.0.1
+        id: upload-release-asset-darwin
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./pingme-darwin-amd64.tar.gz
+          asset_name: pingme-darwin-amd64.tar.gz
+          asset_content_type: application/gzip

@@ -1,0 +1,17 @@
+# Binary Output
+pingme
+pingme-cli
+
+# Script
+*.sh
+
+# Log
+*.log
+*.dat
+*.txt
+
+# Database
+*.db
+
+# Config
+config.json
