@@ -10,7 +10,7 @@ import (
 	"time"
 
 	"github.com/fatih/color"
-	"github.com/noobly314/pingme/httping"
+	"github.com/i3h/tcping/httping"
 	"github.com/sirupsen/logrus"
 )
 

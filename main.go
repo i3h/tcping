@@ -6,10 +6,10 @@ import (
 	"net"
 	"strings"
 
-	"github.com/noobly314/pingme/httping"
-	"github.com/noobly314/pingme/mtr"
-	"github.com/noobly314/pingme/ping"
-	"github.com/noobly314/pingme/tcping"
+	"github.com/i3h/tcping/httping"
+	"github.com/i3h/tcping/mtr"
+	"github.com/i3h/tcping/ping"
+	"github.com/i3h/tcping/tcping"
 )
 
 var (

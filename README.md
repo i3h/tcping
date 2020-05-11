@@ -1,6 +1,6 @@
 # Introduction
 
-Pingme is ping probe command line tool, supporting ICMP, TCP and HTTP protocols.
+TCPING is ping probe command line tool, supporting ICMP, TCP and HTTP protocols.
 
 You can also use it to query IP information from third-party api provider (currently we use [https://ip-api.com](https://ip-api.com)).
 
@@ -11,19 +11,19 @@ You can also use it to query IP information from third-party api provider (curre
 
 # Installation
 
-1. Download latest [release](https://github.com/noobly314/pingme/releases/latest) (recommend)
+1. Download latest [release](https://github.com/i3h/tcping/releases/latest) (recommend)
 
 2. Use go get
 
 ```
-go get -u github.com/noobly314/pingme
+go get -u github.com/i3h/tcping
 ```
 
 3. Build on your own
 
 ```
-git clone https://github.com/noobly314/pingme.git
-cd pingme
+git clone https://github.com/i3h/tcping.git
+cd tcping
 go build
 ```
 
@@ -46,7 +46,7 @@ go build
 # Examples
 
 ```
-$ pingme -h https://www.google.com
+$ tcping -h https://www.google.com
 Proxy     :    false
 Scheme    :    https
 Host      :    www.google.com
@@ -59,17 +59,17 @@ Total     :    103.06 ms
 ```
 
 ```
-$ pingme -i www.google.com
+$ tcping -i www.google.com
 ICMP   OPEN      74.125.200.147    2.2 ms
 ```
 
 ```
-$ pingme -t www.google.com:443
+$ tcping -t www.google.com:443
 TCP    OPEN      www.google.com:443
 ```
 
 ```
-$ pingme -q www.google.com
+$ tcping -q www.google.com
 IP     :    172.217.194.103
 City   :    Queenstown Estate
 Country:    Singapore
@@ -81,21 +81,21 @@ AS     :    AS15169 Google LLC
 
 Root permission is required when running ICMP ping, since it needs to open raw socket.
 
-You can either use sudo command, or set setuid bit for pingme.
+You can either use sudo command, or set setuid bit for tcping.
 
 ```
 // Use sudo for one-time ping
-$ sudo pingme -i google.com
+$ sudo tcping -i google.com
 
 // Set setuid bit
-$ sudo chown root:root pingme
-$ sudo chmod u+s pingme
+$ sudo chown root:root tcping
+$ sudo chmod u+s tcping
 
 ```
 
 # License
 
-See the [LICENSE](https://github.com/noobly314/pingme/blob/master/LICENSE.md) file for license rights and limitations (MIT).
+See the [LICENSE](https://github.com/i3h/tcping/blob/master/LICENSE.md) file for license rights and limitations (MIT).
 
 # Acknowledgements
 

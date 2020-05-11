@@ -1,6 +1,6 @@
 # Binary Output
-pingme
-pingme-cli
+tcping
+tcping-cli
 
 # Script
 *.sh
