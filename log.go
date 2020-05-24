@@ -83,11 +83,22 @@ func logQuery(info IPInfo) {
 	values := make([]string, v.NumField())
 	for i := 0; i < v.NumField(); i++ {
 		names[i] = v.Type().Field(i).Name
-		values[i] = v.Field(i).Interface().(string)
+		t := v.Field(i).Type().Name()
+		if t == "string" {
+			values[i] = v.Field(i).Interface().(string)
+		} else if t == "bool" {
+			values[i] = strconv.FormatBool(v.Field(i).Interface().(bool))
+		} else if t == "float64" {
+			values[i] = fmt.Sprintf("%f", v.Field(i).Interface().(float64))
+		} else if t == "uint" {
+			values[i] = fmt.Sprint(v.Field(i).Interface().(uint))
+		}
 	}
 	l := getMaxNameLength(names)
 	for i := 0; i < v.NumField(); i++ {
-		fmt.Printf("%s:    %s\n", cyan("%-*s", l, names[i]), values[i])
+		if values[i] != "" {
+			fmt.Printf("%s:    %s\n", cyan("%-*s", l, names[i]), values[i])
+		}
 	}
 }
 

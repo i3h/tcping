@@ -9,15 +9,19 @@ import (
 )
 
 const (
-	API string = "http://ip-api.com/json/"
+	API string = "https://ifconfig.is/json/"
 )
 
 type IPInfo struct {
-	IP      string `json:"query"`
-	City    string `json:"city"`
-	Country string `json:"country"`
-	ISP     string `json:"isp"`
-	AS      string `json:"as"`
+	Continent string  `json:"Continent"`
+	Country   string  `json:"Country"`
+	City      string  `json:"City"`
+	Latitude  float64 `json:"Latitude"`
+	Longitude float64 `json:"Longitude"`
+	TimeZone  string  `json:"TimeZone"`
+	IsEU      bool    `json:"IsEU"`
+	ASN       uint    `json:"ASN"`
+	ORG       string  `json:"ORG"`
 }
 
 func queryInfo(address string) IPInfo {
