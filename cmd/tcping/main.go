@@ -6,14 +6,14 @@ import (
 	"net"
 	"strings"
 
-	"github.com/i3h/tcping/httping"
-	"github.com/i3h/tcping/mtr"
-	"github.com/i3h/tcping/ping"
-	"github.com/i3h/tcping/tcping"
+	"github.com/i3h/tcping/pkg/httping"
+	"github.com/i3h/tcping/pkg/mtr"
+	"github.com/i3h/tcping/pkg/ping"
+	"github.com/i3h/tcping/pkg/tcping"
 )
 
 var (
-	VersionString string
+	VersionString string = "v1.1.0"
 )
 
 func init() {
