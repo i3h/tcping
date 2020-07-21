@@ -13,7 +13,7 @@ import (
 )
 
 var (
-	VersionString string = "v1.1.0"
+	VersionString string
 )
 
 func init() {
