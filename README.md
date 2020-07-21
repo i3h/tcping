@@ -16,14 +16,14 @@ You can also use it to query IP information from [https://ifconfig.is](https://i
 2. Use go get
 
 ```
-go get -u github.com/i3h/tcping
+go get -u github.com/i3h/tcping/cmd/tcping
 ```
 
 3. Build on your own
 
 ```
 git clone https://github.com/i3h/tcping.git
-cd tcping
+cd tcping/cmd/tcping
 go build
 ```
 
@@ -45,36 +45,68 @@ go build
 
 # Examples
 
-```
-$ tcping -h https://www.google.com
+```bash
+# Test port
+$ tcping google.com 443
+
+TCP    OPEN      [2404:6800:4003:c03::71]:443
+
+# Test with protocol
+$ tcping https://google.com
+
+Continent:    North America
+Country  :    United States
+Latitude :    37.751000
+Longitude:    -97.822000
+TimeZone :    America/Chicago
+IsEU     :    false
+ASN      :    15169
+ORG      :    GOOGLE
+
 Proxy     :    false
 Scheme    :    https
-Host      :    www.google.com
-DNS Lookup:    2.05 ms
-TCP       :    2.41 ms
-TLS       :    68.92 ms
-Process   :    29.28 ms
-Transfer  :    0.19 ms
-Total     :    103.06 ms
-```
+Host      :    google.com
+DNS Lookup:    0.85 ms
+TCP       :    1.62 ms
+TLS       :    3.11 ms
+Process   :    32.91 ms
+Transfer  :    0.15 ms
+Total     :    38.72 ms
 
-```
-$ tcping -i www.google.com
-ICMP   OPEN      74.125.200.147    2.2 ms
-```
+# HTTP ping
+$ tcping -h https://google.com
 
-```
-$ tcping -t www.google.com:443
-TCP    OPEN      www.google.com:443
-```
+Proxy     :    false
+Scheme    :    https
+Host      :    google.com
+DNS Lookup:    0.92 ms
+TCP       :    1.71 ms
+TLS       :    2.99 ms
+Process   :    32.24 ms
+Transfer  :    0.14 ms
+Total     :    38.10 ms
 
-```
-$ tcping -q www.google.com
-IP     :    172.217.194.103
-City   :    Queenstown Estate
-Country:    Singapore
-ISP    :    Google LLC
-AS     :    AS15169 Google LLC
+# ICMP ping
+$ tcping -i google.com
+
+ICMP   OPEN      172.217.194.113    2.0 ms
+
+# Query IP info
+$ tcping -q google.com
+
+Continent:    North America
+Country  :    United States
+Latitude :    37.751000
+Longitude:    -97.822000
+TimeZone :    America/Chicago
+IsEU     :    false
+ASN      :    15169
+ORG      :    GOOGLE
+
+# Test port
+$ tcping -t google.com:443
+
+TCP    OPEN      google.com:443
 ```
 
 # Note
@@ -83,11 +115,11 @@ Root permission is required when running ICMP ping, since it needs to open raw s
 
 You can either use sudo command, or set setuid bit for tcping.
 
-```
-// Use sudo for one-time ping
+```bash
+# Use sudo for one-time ping
 $ sudo tcping -i google.com
 
-// Set setuid bit
+# Set setuid bit
 $ sudo chown root:root tcping
 $ sudo chmod u+s tcping
 
