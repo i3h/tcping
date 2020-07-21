@@ -1,8 +1,8 @@
 # Introduction
 
-TCPING is ping probe command line tool, supporting ICMP, TCP and HTTP protocols.
+Tcping is ping probe command line tool, supporting ICMP, TCP and HTTP protocols.
 
-You can also use it to query IP information from third-party api provider (currently we use [https://ip-api.com](https://ip-api.com)).
+You can also use it to query IP information from [https://ifconfig.is](https://ifconfig.is).
 
 # Features
 
@@ -98,8 +98,6 @@ $ sudo chmod u+s tcping
 See the [LICENSE](https://github.com/i3h/tcping/blob/master/LICENSE.md) file for license rights and limitations (MIT).
 
 # Acknowledgements
-
-[https://ip-api.com](https://ip-api.com)
 
 [lmas/icmp_ping.go](https://gist.github.com/lmas/c13d1c9de3b2224f9c26435eb56e6ef3)
 
